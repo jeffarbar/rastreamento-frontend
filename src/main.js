@@ -35,6 +35,10 @@ import Chartist from "chartist";
 
 import Modal from '@/components'
 
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+
+Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 
 // configure router
 const router = new VueRouter({
@@ -49,14 +53,20 @@ const base = axios.create({
   //baseURL: 'http://localhost:8082/rastreamento'
 })
 
+const baseTrajeto = axios.create({
+  baseURL: 'http://13.90.255.204:8092/trajeto'
+})
+
 Vue.prototype.$http = base
+Vue.prototype.$httpTrajeto = baseTrajeto
 
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Storage); 
-Vue.component(Modal)
+
+Vue.component(Modal);
 Vue.component('modal', {
   template: '#modal-template'
 })
@@ -69,6 +79,7 @@ new Vue({
   router,
   data: {
     Chartist: Chartist,
-    http: base
+    http: base,
+    httpTrajeto: baseTrajeto
   }
 });

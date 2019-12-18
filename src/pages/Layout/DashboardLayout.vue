@@ -5,25 +5,42 @@
       <mobile-menu slot="content"></mobile-menu>
 
       <li v-for="menu in listaMenu">
-        <sidebar-link :to="menu.link">
-            <md-icon>{{ menu.icone }}</md-icon>
-            <p>{{  menu.titulo }}</p>
-        </sidebar-link>
+
+        <div v-if="menu.blank" >
+          <sidebar-link to="#irpara" :onclick="ir(menu.link)"> 
+              <md-icon>{{ menu.icone }}</md-icon>
+              <p>{{  menu.titulo }}</p>
+          </sidebar-link>
+        </div>  
+        <div v-else >
+          <sidebar-link :to="menu.link">
+              <md-icon>{{ menu.icone }}</md-icon>
+              <p>{{  menu.titulo }}</p>
+          </sidebar-link>
+        </div>  
         <br>
-      </li>  
- <!--
+      </li>
+
+     <!--  
+      <sidebar-link to="/trajeto"> 
+        <md-icon>navigation</md-icon>
+        <p>Trajeto</p>
+      </sidebar-link>
+       <sidebar-link to="#irpara" :onclick="ir('http://13.90.142.231:8080')"> 
+        <md-icon>chat_bubble</md-icon>
+        <p>Mensagem</p>
+      </sidebar-link>
+
       <sidebar-link to="/maps">
         <md-icon>location_on</md-icon>
         <p>Mapa</p>
       </sidebar-link>
-        -->
-      <!--
+  
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
-      -->
-       <!--
+ 
       <sidebar-link to="/pontomonitorado">
         <md-icon>directions_car</md-icon>
         <p>Ponto Monitorado</p>
@@ -44,11 +61,8 @@
         <md-icon>person</md-icon>
         <p>Usuário</p>
       </sidebar-link>
-      <sidebar-link to="http://localhost:8000/app/index.html" target="_blank">
-        <md-icon>chat_bubble</md-icon>
-        <p>Mensagem</p>
-      </sidebar-link>
-        -->
+     -->
+
       <!--
       <sidebar-link to="/typography">
         <md-icon>library_books</md-icon>
@@ -102,6 +116,13 @@ export default {
     getMenu(){
       let usuario = this.$localStorage.get('usuario')
       this.listaMenu = usuario.perfilVo.permissaoMenuVo;
+    },
+    ir(url){
+      if(this.$route.fullPath != undefined && this.$route.fullPath.endsWith('#irpara')){
+
+        let usuario = this.$localStorage.get('usuario')
+        window.open(url + '/' + usuario.idUsuario, '_blank');
+      }
     }
   }
 }

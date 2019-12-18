@@ -11,7 +11,8 @@ import Dispositivo from "@/pages/Dispositivo.vue";
 import Typography from "@/pages/Typography.vue";
 import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
-import Notifications from "@/pages/Notifications.vue";
+import Trajeto from "@/pages/Trajeto.vue";
+//import Notifications from "@/pages/Notifications.vue";
 
 const routes = [ 
   {
@@ -89,6 +90,14 @@ const routes = [
           hideFooter: true
         },
         component: Maps
+      },
+      {
+        path: "trajeto",
+        name: "Tajeto",
+        meta: {
+          hideFooter: true
+        },
+        component: Trajeto
       },
       {
         path: "maps",

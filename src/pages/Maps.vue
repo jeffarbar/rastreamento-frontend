@@ -166,11 +166,12 @@ export default {
       })
     },
     getLocalizacao(){
-      
+
       let self = this
       self.listaLocalizacao = []
       this.$http.get('/posicaoAtualPontoMonitorado/' + this.idPontoMonitorado)    
       .then(function(response) {
+        console.log(response.data)
         self.getLocalizacaoCentral(response.data.latitude , response.data.longitude )
         self.listaLocalizacao[0] = response.data;
         GoogleMapsLoader.KEY = self.keyGoogle;
@@ -189,7 +190,7 @@ export default {
       })
     },
     getLocalizacaoCentral(latitude,longitude){
-
+      console.log('OOOO ' + latitude + ' III ' + longitude)
       if(latitude != null && longitude != null ){
         let localizacaoCentral = { 
             latitude: latitude,

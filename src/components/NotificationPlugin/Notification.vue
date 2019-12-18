@@ -116,6 +116,7 @@ export default {
   cursor: pointer;
   position: absolute;
   width: 41%;
+  height: 9%;
 
   &.center {
     left: 0;

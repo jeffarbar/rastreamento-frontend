@@ -13,7 +13,7 @@
       </a>
 
       <a
-        href="https://www.send.com"
+        href="http://sendsolutions.me"
         target="_blank"
         class="simple-text logo-normal"
       >
