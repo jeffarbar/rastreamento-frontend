@@ -16,7 +16,7 @@
             
             <md-card class="md-card-plain">
     
-              <md-card-header data-background-color="blue">
+              <md-card-header data-background-color="$cyan">
                 <h4 class="title">Cadastrar Ponto Monitorado</h4>
               </md-card-header>
                 <md-card-content>

@@ -1,6 +1,8 @@
 <template>
   <md-card class="md-card-profile">
     <div class="md-card-avatar">
+      <img src="./../../assets/img/profile.png" alt=""> 
+      <!--
        <picture-input
          ref="pictureInput"
          size="1"
@@ -12,6 +14,7 @@
          }"
        >
        </picture-input>
+       -->
     </div>
 
     <md-card-content>
@@ -21,7 +24,8 @@
           {{usuario.sobre}}
       </p>
       <transition name="bounce">
-        <md-button v-if="mostraBtUpload" class="md-round md-info" v-bind:class="{ disabled: !image }" @click="upload()">
+        <!-- <md-button v-if="mostraBtUpload" class="md-round md-info" v-bind:class="{ disabled: !image }" @click="upload()"> -->
+
           <md-icon>add</md-icon>
           Upload
         </md-button>
@@ -58,7 +62,10 @@ export default {
     upload(){
       let self = this
       this.mostraBtUpload = false;
-      const formData = new FormData();
+
+       console.log("FOIIII " + this.image)
+
+      /*
       formData.append("idUsuario", this.usuario.idUsuario);
       formData.append("fotoPerfil", this.image);
       const config = {
@@ -71,7 +78,7 @@ export default {
       this.$refs.pictureInput.image="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
       this.$http.post('/usuario/upload',formData, config)
       .then(function(response) { 
-         console.log("FOI " + response.data)
+         console.log("FOIIII " + response.data)
           self.$notify({
             message:
               "Upload realizado com sucesso",
@@ -91,6 +98,7 @@ export default {
               type: 'danger'
           });
       })
+      */
 
     },
     onChanged() {

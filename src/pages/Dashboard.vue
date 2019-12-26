@@ -8,7 +8,7 @@
           :chart-data="dailySalesChart.data"
           :chart-options="dailySalesChart.options"
           :chart-type="'Line'"
-          data-background-color="blue"
+          data-background-color="$cyan"
         >
           <template slot="content">
             <h4 class="title">Daily Sales</h4>

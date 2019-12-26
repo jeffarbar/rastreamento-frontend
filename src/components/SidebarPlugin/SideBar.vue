@@ -6,18 +6,11 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="#" class="simple-text logo-mini">
-        
+      <a href="#" class="simple-text logo-medio">
           <img :src="imgLogo" alt=""  />
- 
       </a>
-
-      <a
-        href="http://sendsolutions.me"
-        target="_blank"
-        class="simple-text logo-normal"
-      >
-        {{ title }}
+      <a href="#" class="simple-text logo-normal">
+        &nbsp;
       </a>
     </div>
     <div class="sidebar-wrapper">
@@ -55,7 +48,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/send-logo.png")
+      default: require("@/assets/img/send-logo.jpg")
     },
     activeColor: {
       type: String,

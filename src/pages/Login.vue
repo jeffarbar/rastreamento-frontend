@@ -1,5 +1,6 @@
 <template>
-    <div class="modal">
+    <div>
+        <div class="modal">
         <mdb-modal>
             <notifications></notifications>
             <md-card class="md-card-plain">
@@ -45,6 +46,12 @@
             </md-card>
         </mdb-modal>
     </div>
+    <div class="copyright" >
+        &copy; {{ new Date().getFullYear() }}
+        powered by Send Solutions<br>
+        contato@sendsolutions.me
+    </div>
+   </div>
 </template>
 
 <script>
@@ -149,4 +156,10 @@
     }
   }
 </script>
+<style>
+.copyright{
+    text-align: center;
+    padding: 50px 40%;
+}
+</style>
 

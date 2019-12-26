@@ -93,7 +93,7 @@ const routes = [
       },
       {
         path: "trajeto",
-        name: "Tajeto",
+        name: "Trajeto",
         meta: {
           hideFooter: true
         },

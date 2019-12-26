@@ -1,4 +1,37 @@
 <template>
+  <div class="content">
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
+        <md-card class="md-card-plain">
+          <md-card-header data-background-color="$cyan">
+            <h4 class="title">Mapa</h4>
+            <p class="category">Mapa do ponto</p>
+          </md-card-header>
+           <div class="md-layout-item md-size-50">
+            <md-field>
+              <label>Seleciona o Ponto Monitorado</label>
+              <md-select v-model="idPontoMonitorado" >
+                <md-option 
+                  v-for="item in listaPontoMonitorado" :value="item.idPontoMonitorado">
+                    {{item.nome}} - {{item.identificador}}
+                </md-option>
+              </md-select>
+            
+              <md-button class="md-round md-info" @click="getLocalizacao()">
+                <md-icon>search</md-icon>
+                  localizar
+              </md-button>
+            </md-field>
+          </div>  
+          <div v-if="idPontoMonitorado" >
+            <a href="#map"><md-icon>expand_less</md-icon></a>
+            <a href="#titulo"><md-icon>expand_more</md-icon></a>
+          </div>
+        <div id="map"></div>
+        </md-card>
+      </div>
+   
+  </div>
+  <!--
   <md-card class="md-card-plain">
       <div class="md-layout-item md-size-50">
         <md-field>
@@ -16,10 +49,13 @@
           </md-button>
         </md-field>
       </div>  
-    
+      <div v-if="idPontoMonitorado" >
+        <a href="#map"><md-icon>expand_less</md-icon></a>
+        <a href="#titulo"><md-icon>expand_more</md-icon></a>
+      </div>
     <div id="map"></div>
   </md-card>
- 
+ -->
 </template>
 
 <script>
@@ -125,6 +161,7 @@ export default {
       });
     
       this.listaLocalizacao.forEach((valor, index) => {
+        console.log( 'valor ' + valor )
          if(  valor.latitude != null && valor.longitude != null ){
             this.addMarker( valor , map);
          }
@@ -132,10 +169,19 @@ export default {
     },
     addMarker(localizacao, map) {
 
+      let title = '';
+      if(localizacao.data != null && localizacao.data != undefined){
+        title = 'Data ' + localizacao.data
+      }
+      if(localizacao.descricao != null && localizacao.descricao != undefined){
+        title = 'Descrição ' + localizacao.descricao
+      }
+
+
       let latLng = {lat: localizacao.latitude , lng: localizacao.longitude}
       let marker = new google.maps.Marker({
         position: latLng,
-        title: localizacao.descricao,
+        title: title,
         animation: google.maps.Animation.DROP,
         icon: {
           url:require('../assets/img/car.png')
@@ -166,9 +212,9 @@ export default {
       })
     },
     getLocalizacao(){
-
+      console.log('this.idPontoMonitorado ' + this.idPontoMonitorado)
       let self = this
-      self.listaLocalizacao = []
+      this.listaLocalizacao = []
       this.$http.get('/posicaoAtualPontoMonitorado/' + this.idPontoMonitorado)    
       .then(function(response) {
         console.log(response.data)

@@ -1,11 +1,10 @@
 <template>
   <footer class="footer">
-    <div class="container">
+    <div>
       <div class="copyright" >
         &copy; {{ new Date().getFullYear() }}
-        <a href="https://www.google.com" target="_blank"
-          >Send</a
-        >, rastreamento
+        powered by Send Solutions<br>
+        contato@sendsolutions.me
       </div>
     </div>
   </footer>
@@ -13,4 +12,4 @@
 <script>
 export default {};
 </script>
-<style></style>
+

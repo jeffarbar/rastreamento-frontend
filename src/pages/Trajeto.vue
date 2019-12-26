@@ -1,6 +1,45 @@
 <template>
+   <div class="content">
+        <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
+            <md-card class="md-card-plain">
+                <md-card-header data-background-color="$cyan">
+                    <h4 class="title">Trajeto</h4>
+                    <p class="category">Trajeto percorrido</p>
+                </md-card-header>
+                <div class="md-layout-item md-size-50" id="pesquisa">
+                    <md-field>       
+                        <VueCtkDateTimePicker v-model="dtInicial" formatted='DD/MM/YY HH:mm' format='YYYY-MM-DD HH:mm'/> 
+                        &ensp;&ensp;
+                        <VueCtkDateTimePicker v-model="dtFinal" formatted='DD/MM/YY HH:mm' format='YYYY-MM-DD HH:mm' />  
+                    </md-field>
+                    <md-field>
+                        <label>Ponto Monitorado</label>
+                        <md-select v-model="identificadorPontoMonitorado" >
+                            <md-option v-for="item in listaPontoMonitorado" :value="item.identificador">
+                                {{item.nome}} - {{item.identificador}}
+                            </md-option>
+                        </md-select>
+                        <md-button class="md-round md-info" @click="montaTrajetoria()">
+                            <md-icon>search</md-icon>
+                            Trajeto
+                        </md-button>
+                    </md-field>
+                </div>  
+        
+                <div v-if="identificadorPontoMonitorado && dtInicial && dtFinal">
+                    <a href="#map"><md-icon>expand_less</md-icon></a>
+                    <a href="#titulo"><md-icon>expand_more</md-icon></a>
+                </div>
+                <div v-if="identificadorPontoMonitorado" id="map"></div>
+                <div v-else >
+                    <p class="center">Por favor selecione um Ponto Monitorado</p>
+                </div>
+            </md-card>
+        </div>
+    </div>
+ <!-- 
   <md-card class="md-card-plain">
-      <div class="md-layout-item md-size-60" id="pesquisa">
+      <div class="md-layout-item md-size-50" id="pesquisa">
         <md-field>
           <label>Ponto Monitorado</label>
           <md-select v-model="identificadorPontoMonitorado" >
@@ -11,9 +50,9 @@
           </md-select>
         </md-field>
         <md-field>       
-          <VueCtkDateTimePicker v-model="dtInicial" format='YYYY-MM-DD HH:mm'/> 
+          <VueCtkDateTimePicker v-model="dtInicial" formatted='DD/MM/YY HH:mm' format='YYYY-MM-DD HH:mm'/> 
            &ensp;&ensp;  
-          <VueCtkDateTimePicker v-model="dtFinal"  format='YYYY-MM-DD HH:mm' />  
+          <VueCtkDateTimePicker v-model="dtFinal" formatted='DD/MM/YY HH:mm' format='YYYY-MM-DD HH:mm' />  
             &ensp;&ensp;      
           <md-button class="md-round md-info" @click="montaTrajetoria()">
             <md-icon>search</md-icon>
@@ -31,7 +70,7 @@
         <p class="center">Por favor selecione um Ponto Monitorado</p>
     </div>
   </md-card>
- 
+ -->
 </template>
 <script>
     import GoogleMapsLoader from "google-maps";
@@ -39,6 +78,7 @@
 
         data() {
             return {
+
                 dtInicial: null,
                 dtFinal: null,
                 identificadorPontoMonitorado: null,
@@ -167,7 +207,7 @@
                 var flightPath = new google.maps.Polyline({
                     path: this.coordinates,
                     geodesic: true,
-                    strokeColor: '#FF0000',
+                    strokeColor: '#2d4f9f',
                     strokeOpacity: 1.0,
                     strokeWeight: 6
                 });
