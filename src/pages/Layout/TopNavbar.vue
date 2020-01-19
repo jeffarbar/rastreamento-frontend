@@ -61,7 +61,7 @@
                       <p class="hidden-lg hidden-md">{{nomeUsuario}}</p>
                     </md-button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a href="#/user">Perfil</a></li>
+                      <li><a href="#/usuario">Perfil</a></li>
                       <li><a href="#/login">Sair</a></li>
                     </ul>
                   </drop-down>
@@ -88,22 +88,24 @@ export default {
   created(){
     let usuario = this.$localStorage.get('usuario')
     this.nomeUsuario = usuario.nome;
-    this.getNotificacao( usuario.idUsuario)
+    this.getNotificacao( usuario.idEmpresa)
   },
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
-    getNotificacao(idUsuario){
+    getNotificacao(idEmpresa){
 
-      let self = this
-      this.$http.get('/notificacao/'+ idUsuario)
-        .then(function(response) {
-          self.notificacoes = response.data
-          self.qdtNotificao = response.data.length
-        }).catch(e => {
-        console.log( e )
-      })
+      if( idEmpresa != null ){ 
+        let self = this
+        this.$http.get('/notificacao/'+ idEmpresa)
+          .then(function(response) {
+            self.notificacoes = response.data
+            self.qdtNotificao = response.data.length
+          }).catch(e => {
+          console.log( e )
+        })
+      }
     }
   }
 };

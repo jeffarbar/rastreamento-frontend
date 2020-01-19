@@ -34,6 +34,14 @@
 import SidebarLink from "./SidebarLink.vue";
 
 export default {
+  data() {
+    return {
+    
+    }
+  },
+  created(){
+  
+  },
   components: {
     SidebarLink
   },
@@ -46,10 +54,12 @@ export default {
       type: String,
       default: require("@/assets/img/sidebar-2.jpg")
     },
+    
     imgLogo: {
       type: String,
       default: require("@/assets/img/send-logo.jpg")
     },
+    
     activeColor: {
       type: String,
       default: "green",

@@ -24,14 +24,27 @@
 
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Companhia</label>
-              <md-input v-model="usuario.companhia" type="text" ></md-input>
+              <label>Profissão</label>
+              <md-input v-model="usuario.profissao" type="text" ></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Profissão</label>
-              <md-input v-model="usuario.profissao" type="text" ></md-input>
+        
+            <md-field v-if="usuario.admin">
+              
+              <label>Perfil</label>
+              <md-input v-model="usuario.descricao" type="text" disabled ></md-input>
+            </md-field>
+            
+             <md-field v-else>
+               
+              <label>Perfil</label>
+              <md-select
+                v-model="usuario.idPerfil" 
+              >
+                <md-option v-for="item in listaPerfil" :value="item.idPerfil" >{{item.descricao}}</md-option>
+              </md-select>
+
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
@@ -54,6 +67,11 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
+            <md-button v-if="this.urlParametro" class="md-round md-info" @click="voltar()" >
+              <md-icon>home</md-icon>
+               Voltar 
+            </md-button>
+            &nbsp;&nbsp;
             <md-button class="md-round md-info" @click="salva()" >
               <md-icon>thumb_up</md-icon>
               Salvar 
@@ -72,6 +90,7 @@ export default {
   
   data() {
     return {
+      urlParametro: false,
       usuario: {
           nome: null,
           email: null,
@@ -79,14 +98,70 @@ export default {
           companhia: null,
           senha: null,
           confirmarSenha: null,
-          sobre: null
-      }
+          sobre: null,
+          idPerfil:null,
+          descricao:null,
+          admin:null
+      },
+      listaPerfil: []
     };
   },
   created(){
-    this.usuario = this.$localStorage.get('usuario')
+
+    this.urlParametro = this.$route.params.idUsuario != undefined
+
+    if(  this.$route.path != '/usuario'){ 
+
+      let idUsuario = this.$route.params.idUsuario;
+      if(idUsuario != null){
+        this.getUsuario(idUsuario)
+      }else{
+        this.usuario = this.$localStorage.get('usuario')
+      }
+    }
+
+    this.getPerfil();
+    console.log(this.usuario)
   },
   methods: {
+    voltar(){
+      this.$router.push('/listausuario') 
+    },
+    getUsuario(idUsuario){
+
+      let self = this
+      this.$http.get('/usuario/' + idUsuario)    
+      .then(function(response) {
+        self.usuario = response.data;
+      }).catch(e => {
+          self.$notify({
+          message:
+              "Lamentamos, mas ocorreu um erro na sua solicitação",
+              icon: "add_alert",
+              horizontalAlign: 'center',
+              verticalAlign: 'top',
+              type: 'danger'
+          });
+      })
+    },
+    getPerfil(){
+
+      let self = this
+      this.$http.get('/perfil/')    
+      .then(function(response) {
+        self.listaPerfil = response.data;
+        //self.$localStorage.set('usuario', self.usuario)
+      }).catch(e => {
+          self.$notify({
+          message:
+              "Lamentamos, mas ocorreu um erro na sua solicitação",
+              icon: "add_alert",
+              horizontalAlign: 'center',
+              verticalAlign: 'top',
+              type: 'danger'
+          });
+      })
+    },
     salva() {
       console.log( ">"+this.usuario.senha +"<>"+ this.usuario.confirmarSenha+"<" )
       let self = this
@@ -114,12 +189,12 @@ export default {
               type: 'warning'
           });
       }else{
-      
+
         this.$http.put('/usuario/',
           this.usuario
         )    
         .then(function(response) {
-          self.$localStorage.set('usuario', self.usuario)
+          //self.$localStorage.set('usuario', self.usuario)
           self.$notify({
             message:
               "Dados alterados com sucesso",

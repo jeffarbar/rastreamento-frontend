@@ -114,7 +114,7 @@ export default {
         identificador: null,
         tipoPontoMonitorado: null,
         idTipoPontoMonitorado: null,
-        idUsuario: null
+        idEmpresa: null
       },
       listaTipoPontoMonitorado: [],
       listaPontoMonitorado: []
@@ -183,26 +183,29 @@ export default {
       this.pontoMonitorado.identificador = null;
       this.pontoMonitorado.tipoPontoMonitorado = null;
       this.pontoMonitorado.idTipoPontoMonitorado = null;
-      this.pontoMonitorado.idUsuario = null;
+      this.pontoMonitorado.idEmpresa = null;
     },
     getPontoMonitorado(){
 
       let usuario = this.$localStorage.get('usuario')
 
-      let self = this
-      this.$http.get('/pontoMonitorado/usuario/'+ usuario.idUsuario)    
-      .then(function(response) {
-        self.listaPontoMonitorado = response.data;
-      }).catch(e => {
-          self.$notify({
-          message:
-              "Lamentamos, mas ocorreu um erro na sua solicitação",
-              icon: "add_alert",
-              horizontalAlign: 'center',
-              verticalAlign: 'top',
-              type: 'danger'
-          });
-      })
+      if( usuario != null &&  usuario.idEmpresa != null){   
+
+        let self = this
+        this.$http.get('/pontoMonitorado/empresa/'+ usuario.idEmpresa)    
+        .then(function(response) {
+          self.listaPontoMonitorado = response.data;
+        }).catch(e => {
+            self.$notify({
+            message:
+                "Lamentamos, mas ocorreu um erro na sua solicitação",
+                icon: "add_alert",
+                horizontalAlign: 'center',
+                verticalAlign: 'top',
+                type: 'danger'
+            });
+        })
+      }
     },
     getTipoPontoMonitorado(){
 
@@ -225,11 +228,11 @@ export default {
     salvaPontoMonitorado(){
       
       let usuario = this.$localStorage.get('usuario')
-      this.pontoMonitorado.idUsuario=usuario.idUsuario;
+      this.pontoMonitorado.idEmpresa=usuario.idEmpresa;
 
       let self = this
       if( this.pontoMonitorado == null || this.pontoMonitorado.nome == null || this.pontoMonitorado.identificador == null 
-        || this.pontoMonitorado.idTipoPontoMonitorado == null || this.pontoMonitorado.idUsuario == null ){
+        || this.pontoMonitorado.idTipoPontoMonitorado == null || this.pontoMonitorado.idEmpresa == null ){
           
           self.$notify({
             message:

@@ -188,7 +188,7 @@ export default {
       let usuario = this.$localStorage.get('usuario')
  
       let self = this
-      this.$http.get('/dispositivo/usuario/'+ usuario.idUsuario)    
+      this.$http.get('/dispositivo/empresa/'+ usuario.idEmpresa)    
       .then(function(response) {
         console.log("tttt" + response.data)
         self.listaDispositivo = response.data;
@@ -225,21 +225,23 @@ export default {
 
       let usuario = this.$localStorage.get('usuario')
 
-      let self = this
-      this.$http.get('/pontoMonitorado/usuario/'+ usuario.idUsuario)    
-      .then(function(response) {
-        console.log("tttt" + response.data)
-        self.listaPontoMonitorado = response.data;
-      }).catch(e => {
-          self.$notify({
-          message:
-              "Lamentamos, mas ocorreu um erro na sua solicitação",
-              icon: "add_alert",
-              horizontalAlign: 'center',
-              verticalAlign: 'top',
-              type: 'danger'
-          });
-      })
+      if( usuario != null && usuario.idEmpresa != null ){ 
+        let self = this
+        this.$http.get('/pontoMonitorado/empresa/'+ usuario.idEmpresa)    
+        .then(function(response) {
+          console.log("tttt" + response.data)
+          self.listaPontoMonitorado = response.data;
+        }).catch(e => {
+            self.$notify({
+            message:
+                "Lamentamos, mas ocorreu um erro na sua solicitação",
+                icon: "add_alert",
+                horizontalAlign: 'center',
+                verticalAlign: 'top',
+                type: 'danger'
+            });
+        })
+      }
     },
 
     salvaDispositivo(){

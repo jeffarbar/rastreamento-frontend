@@ -137,6 +137,7 @@
                     this.login
                 )    
                 .then(function(response) {
+                    console.log('DDDDDDD ' + JSON.stringify( response.data))
                     self.$localStorage.set('usuario', response.data)
                     self.$router.push('maps') 
                 }).catch(e => {

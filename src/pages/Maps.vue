@@ -192,24 +192,26 @@ export default {
     
     getLocalizacaoAll(){
     
-      let self = this
-      this.$http.get('/posicaoAtualPontoMonitorado/all/' + this.usuario.idUsuario)    
-      .then(function(response) {
-        self.listaLocalizacao = response.data;
-        GoogleMapsLoader.KEY = self.keyGoogle;
-        GoogleMapsLoader.load(google => {
-          self.initMap(google);
-        });
-      }).catch(e => {
-          self.$notify({
-          message:
-              "Lamentamos, mas ocorreu um erro na sua solicitação",
-              icon: "add_alert",
-              horizontalAlign: 'center',
-              verticalAlign: 'top',
-              type: 'danger'
+      if( this.usuario != null && this.usuario.idEmpresa != null ){ 
+        let self = this
+        this.$http.get('/posicaoAtualPontoMonitorado/all/' + this.usuario.idEmpresa)    
+        .then(function(response) {
+          self.listaLocalizacao = response.data;
+          GoogleMapsLoader.KEY = self.keyGoogle;
+          GoogleMapsLoader.load(google => {
+            self.initMap(google);
           });
-      })
+        }).catch(e => {
+            self.$notify({
+            message:
+                "Lamentamos, mas ocorreu um erro na sua solicitação",
+                icon: "add_alert",
+                horizontalAlign: 'center',
+                verticalAlign: 'top',
+                type: 'danger'
+            });
+        })
+      }
     },
     getLocalizacao(){
       console.log('this.idPontoMonitorado ' + this.idPontoMonitorado)
@@ -248,21 +250,24 @@ export default {
       }
     },
     getPontoMonitorado(){
-      let self = this
-      this.$http.get('/pontoMonitorado/usuario/'+ this.usuario.idUsuario)    
-      .then(function(response) {
-        console.log("tttt" + response.data)
-        self.listaPontoMonitorado = response.data;
-      }).catch(e => {
-          self.$notify({
-          message:
-              "Lamentamos, mas ocorreu um erro na sua solicitação",
-              icon: "add_alert",
-              horizontalAlign: 'center',
-              verticalAlign: 'top',
-              type: 'danger'
-          });
-      })
+
+      if( this.usuario != null && this.usuario.idEmpresa != null){ 
+        let self = this
+        this.$http.get('/pontoMonitorado/empresa/'+ this.usuario.idEmpresa)    
+        .then(function(response) {
+          console.log("tttt" + response.data)
+          self.listaPontoMonitorado = response.data;
+        }).catch(e => {
+            self.$notify({
+            message:
+                "Lamentamos, mas ocorreu um erro na sua solicitação",
+                icon: "add_alert",
+                horizontalAlign: 'center',
+                verticalAlign: 'top',
+                type: 'danger'
+            });
+        })
+      }
     },
   }
 

@@ -265,23 +265,23 @@
             getPontoMonitorado(){
 
                 //this.listaPontoMonitorado = [ {identificador:'sdfsd6767fd', nome: 'teste'}, {identificador:'tsdasdas', nome: 'ola'} ]
-  
-                let self = this
-                this.$http.get('/pontoMonitorado/usuario/'+ this.usuario.idUsuario)   
-                .then(function(response) {
-                    
-                    self.listaPontoMonitorado = response.data;
-                }).catch(e => {
-                    self.$notify({
-                    message:
-                        "Lamentamos, mas ocorreu um erro na sua solicitação",
-                        icon: "add_alert",
-                        horizontalAlign: 'center',
-                        verticalAlign: 'top',
-                        type: 'danger'
-                    });
-                })
-                
+                if(this.usuario != null && this.usuario.idEmpresa != null){ 
+                    let self = this
+                    this.$http.get('/pontoMonitorado/empresa/'+ this.usuario.idEmpresa)   
+                    .then(function(response) {
+                        
+                        self.listaPontoMonitorado = response.data;
+                    }).catch(e => {
+                        self.$notify({
+                        message:
+                            "Lamentamos, mas ocorreu um erro na sua solicitação",
+                            icon: "add_alert",
+                            horizontalAlign: 'center',
+                            verticalAlign: 'top',
+                            type: 'danger'
+                        });
+                    })
+                }
             }
         }
         

@@ -3,7 +3,7 @@
     <notifications></notifications>
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-
+  
       <li v-for="menu in listaMenu">
 
         <div v-if="menu.blank" >
@@ -20,7 +20,17 @@
         </div>  
         <br>
       </li>
-
+   <!--  
+       <sidebar-link to="/listaempresa">
+        <md-icon>business_center</md-icon>
+        <p>Empresa</p>
+      </sidebar-link>
+        <sidebar-link to="/listausuario">
+        <md-icon>location_on</md-icon>
+        <p>Usuario</p>
+      </sidebar-link>
+-->
+ 
      <!--  
       <sidebar-link to="/trajeto"> 
         <md-icon>navigation</md-icon>
@@ -31,11 +41,7 @@
         <p>Mensagem</p>
       </sidebar-link>
 
-      <sidebar-link to="/maps">
-        <md-icon>location_on</md-icon>
-        <p>Mapa</p>
-      </sidebar-link>
-  
+    
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
@@ -121,7 +127,7 @@ export default {
       if(this.$route.fullPath != undefined && this.$route.fullPath.endsWith('#irpara')){
 
         let usuario = this.$localStorage.get('usuario')
-        window.open(url + '/' + usuario.idUsuario, '_blank');
+        window.open(url + '/' + usuario.idEmpresa, '_blank');
       }
     }
   }

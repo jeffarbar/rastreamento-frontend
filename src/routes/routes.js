@@ -4,6 +4,9 @@ import Registro from "@/pages/Registro.vue";
 import AlteracaoSenha from "@/pages/AlteracaoSenha.vue";
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
+import ListUser from "@/pages/ListUser.vue";
+import Company from "@/pages/Company.vue";
+import ListCompany from "@/pages/ListCompany.vue";
 import PontoMonitorado from "@/pages/PontoMonitorado.vue";
 import TipoPontoMonitorado from "@/pages/TipoPontoMonitorado.vue";
 import Modelo from "@/pages/Modelo.vue";
@@ -12,6 +15,7 @@ import Typography from "@/pages/Typography.vue";
 import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Trajeto from "@/pages/Trajeto.vue";
+import Conversation from "@/pages/Conversation.vue";
 //import Notifications from "@/pages/Notifications.vue";
 
 const routes = [ 
@@ -59,7 +63,32 @@ const routes = [
         component: Dashboard
       },
       {
-        path: "user",
+        path: "empresa",
+        name: "Empresa",
+        component: Company
+      },
+      {
+        path: "empresa/:idEmpresa",
+        name: "Empresa",
+        component: Company
+      },
+      {
+        path: "listaempresa",
+        name: "ListaEmpresa",
+        component: ListCompany
+      },
+      {
+        path: "usuario",
+        name: "Usuário",
+        component: UserProfile
+      },
+      {
+        path: "listausuario",
+        name: "ListaUsuário",
+        component: ListUser
+      },
+      {
+        path: "usuario/:idUsuario",
         name: "Usuário",
         component: UserProfile
       },
@@ -116,6 +145,11 @@ const routes = [
         path: "modelo",
         name: "Modelo",
         component: Modelo
+      },
+      {
+        path: "conversation",
+        name: "Conversation",
+        component: Conversation
       }
     ]
   }

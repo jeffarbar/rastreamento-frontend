@@ -46,18 +46,21 @@ export default {
   created(){
     let usuario = this.$localStorage.get('usuario')
     this.nomeUsuario = usuario.nome;
-    this.getNotificacao( usuario.idUsuario )
+    this.getNotificacao( usuario.idEmpresa )
   },
   methods: {
-    getNotificacao(idUsuario){
-      let self = this
-      this.$http.get('/notificacao/'+ idUsuario)
-        .then(function(response) {
-          self.notificacoes = response.data
-          self.qdtNotificao = response.data.length
-        }).catch(e => {
-        console.log( e )
-      })
+    getNotificacao(idEmpresa){
+
+      if(idEmpresa != null) { 
+        let self = this
+        this.$http.get('/notificacao/'+ idEmpresa)
+          .then(function(response) {
+            self.notificacoes = response.data
+            self.qdtNotificao = response.data.length
+          }).catch(e => {
+          console.log( e )
+        })
+      }
     }
   }
 };
