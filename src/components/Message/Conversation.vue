@@ -52,7 +52,7 @@ export default {
             () => {
                 this.getHistory()
             }, 
-            1000 * 60 * 3
+            1000 * 30 
         );
     },
     

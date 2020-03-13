@@ -174,7 +174,7 @@ export default {
         title = 'Data ' + localizacao.data
       }
       if(localizacao.descricao != null && localizacao.descricao != undefined){
-        title = 'Descrição ' + localizacao.descricao
+        title = localizacao.descricao
       }
 
 

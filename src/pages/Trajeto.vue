@@ -160,7 +160,7 @@
         methods: {
 
             montaTrajetoria(){
-
+                this.coordinates = []
                 if(this.identificadorPontoMonitorado == null || this.identificadorPontoMonitorado == '' ||
                 this.dtInicial == null  || this.dtInicial ==  '' || this.dtFinal == null || this.dtFinal == ''){
                    this.$notify({
@@ -177,7 +177,7 @@
                     let dtFin = this.dtFinal.replace(/[ ]+/g,'') + ':00';
 
                     console.log(this.identificadorPontoMonitorado+'/'+dtIni+'/'+dtFin)
-
+                   
                     let self = this
                     this.$httpTrajeto.get('/trajeto/'+this.identificadorPontoMonitorado+'/'+dtIni+'/'+dtFin)    
                     .then(function(response) {
