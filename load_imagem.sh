@@ -1,3 +1,3 @@
-docker build -t jeffersonfarias/boris-front:latest  -f Dockerfile .
+docker build -t jeffersonfarias/boris-front:1.0.0  -f Dockerfile .
 docker login --username=jeffersonfarias
-docker push jeffersonfarias/boris-front:latest
+docker push jeffersonfarias/boris-front:1.0.0

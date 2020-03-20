@@ -85,7 +85,7 @@
                 usuario: null,
                 listaPontoMonitorado:[],
                 idPontoMonitorado: null,
-                keyGoogle: "AIzaSyC3G24J7Pvk_zXdrNNTCrt7pmCRvHKYpNc",
+                keyGoogle: "AIzaSyCQcwyb_zjaqpQL70J4YvOzf4uNI0gJ9-E",
                 zoom: 15,
                 scrollwheel: true,
                 coordinates : [],
