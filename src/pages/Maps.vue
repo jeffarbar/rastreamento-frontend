@@ -68,7 +68,7 @@ export default {
       listaPontoMonitorado:[],
       localizacaoCentral: {},
       listaLocalizacao: [],
-      keyGoogle: "AIzaSyC3G24J7Pvk_zXdrNNTCrt7pmCRvHKYpNc",
+      keyGoogle: "AIzaSyCQcwyb_zjaqpQL70J4YvOzf4uNI0gJ9-E",
       styles: [
           {
             featureType: "water",
